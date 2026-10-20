@@ -1,0 +1,12 @@
+# The agent's own dependencies (what the API needs to run).
+langgraph>=1.2,<2
+langchain-core>=1.6,<2
+langchain-ollama>=1.1,<2
+langchain-groq                 # only used with LLM_PROVIDER=groq
+fastapi
+uvicorn
+python-dotenv>=1.2.2,<2
+requests
+# tracing spans for the trajectory evaluation (no judge/metrics in the app);
+# keep in step with the deepeval version elyaeval pins
+deepeval==4.2.0

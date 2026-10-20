@@ -1,0 +1,13 @@
+{
+  "_source": "Typical values for illustration. Lifecycle emissions are IPCC AR5 (2014) median estimates, gCO2-eq per kWh.",
+  "technologies": {
+    "solar_pv":     {"name": "Solar PV (utility scale)", "capacity_factor_range": [0.10, 0.25], "typical_capacity_factor": 0.18, "lifetime_years": [25, 30],  "lifecycle_gco2_per_kwh": 48},
+    "onshore_wind": {"name": "Onshore wind",             "capacity_factor_range": [0.25, 0.45], "typical_capacity_factor": 0.35, "lifetime_years": [20, 25],  "lifecycle_gco2_per_kwh": 11},
+    "offshore_wind":{"name": "Offshore wind",            "capacity_factor_range": [0.40, 0.50], "typical_capacity_factor": 0.45, "lifetime_years": [20, 25],  "lifecycle_gco2_per_kwh": 12},
+    "hydropower":   {"name": "Hydropower",               "capacity_factor_range": [0.35, 0.50], "typical_capacity_factor": 0.40, "lifetime_years": [50, 100], "lifecycle_gco2_per_kwh": 24},
+    "geothermal":   {"name": "Geothermal",               "capacity_factor_range": [0.70, 0.90], "typical_capacity_factor": 0.80, "lifetime_years": [30, 50],  "lifecycle_gco2_per_kwh": 38},
+    "nuclear":      {"name": "Nuclear",                  "capacity_factor_range": [0.80, 0.95], "typical_capacity_factor": 0.90, "lifetime_years": [40, 60],  "lifecycle_gco2_per_kwh": 12},
+    "natural_gas":  {"name": "Natural gas (combined cycle)", "capacity_factor_range": [0.40, 0.70], "typical_capacity_factor": 0.55, "lifetime_years": [30, 40], "lifecycle_gco2_per_kwh": 490},
+    "coal":         {"name": "Coal",                     "capacity_factor_range": [0.40, 0.70], "typical_capacity_factor": 0.55, "lifetime_years": [40, 50],  "lifecycle_gco2_per_kwh": 820}
+  }
+}

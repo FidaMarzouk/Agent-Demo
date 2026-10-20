@@ -1,0 +1,26 @@
+# elyaeval configuration for this project (read from the working directory
+# upward). Override per run with ELYAEVAL_JUDGE_* / ELYAEVAL_BUDGET_* env vars,
+# e.g. to try a hosted judge:
+#   ELYAEVAL_JUDGE_PROVIDER=anthropic ELYAEVAL_JUDGE_MODEL=claude-sonnet-5-5 \
+#   ANTHROPIC_API_KEY=... pytest test_elyaeval_agent.py
+
+[judge]
+# Local Ollama judge   a different model from the agent's (llama3.2:3b).
+provider = "ollama"
+model = "llama3.1"
+
+[thresholds]
+default = 0.7
+tool_correctness = 1.0      # the right tools, or it's wrong
+
+[cache]
+enabled = true
+
+[budget]
+max_seconds = 1800
+on_exceed = "stop"
+
+[regression]
+tolerance = 0.02
+alpha = 0.05
+max_error_rate_increase = 0.05

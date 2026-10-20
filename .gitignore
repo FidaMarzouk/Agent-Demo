@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# secrets (GROQ_API_KEY, ...)
+.env
+.env.*
+
+# elyaeval / DeepEval output
+report/
+.elyaeval_cache/
+.deepeval/
+.deepeval_cache.json
+.deepeval-cache.json
+
