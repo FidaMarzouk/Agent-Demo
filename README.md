@@ -4,8 +4,7 @@ An "energy analyst" tool-calling agent built with **LangGraph**, evaluated with
 [elyaeval](https://github.com/FidaMarzouk/DeepEval-based-Testing-Framework-for-LLM-Applications) at two
 levels: the **actions** it takes (which tools, which arguments, is the answer right) over HTTP, and its
 whole **trajectory** (task completion, step efficiency) in-process   plus
-deterministic guards against runaway agents. This folder is a **self-contained project**: copy it into
-its own repository as-is.
+deterministic guards against runaway agents.
 
 **Stack** (everything runs locally by default)
 - Agent: LangGraph state graph (model node ⇄ tool node), max-steps limit, output-token cap
