@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>results_agent_20261121T112044Z</title>
+<style>/* =========================================================================
+   elyaeval / reporting  shared report theme
+   Single source of truth for every report renderer (html_report.py's
+   render_html_report() and render_comparison_html()). Imported by reading this file's text 
+   and inlining it into a <style> tag, so every generated report stays a single self-contained
+   HTML file with no external asset/CDN dependency, while every report
+   still shares one visual language.
+   ========================================================================= */
+
+:root {
+  color-scheme: light;
+
+  /* brand accents */
+  --ely-cyan:   #1EB8E8;
+  --ely-pink:   #E6127D;
+  --ely-blue:   #2F6FED;
+  --ely-navy:   #16255C;
+  --ely-black:  #0D0D0F;
+
+  /* tinted backgrounds for the accents above */
+  --ely-cyan-tint: #E6F8FD;
+  --ely-pink-tint: #FCE9F3;
+  --ely-blue-tint: #EAF0FE;
+
+  /* semantic (kept distinct from brand accents  pass/fail must read as
+     green/red regardless of theme, this is a test report first) */
+  --pass:   #1a7f37;
+  --fail:   #cf222e;
+  --pass-tint: #E9F7EF;
+  --fail-tint: #FDEDEE;
+
+  --muted:  #6E7781;
+  --border: #E3E6EA;
+  --bg-alt: #F6F8FA;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 3rem;
+  color: var(--ely-black);
+  background:
+    radial-gradient(var(--border) 1px, transparent 1.5px) 0 0 / 22px 22px,
+    #ffffff;
+  background-attachment: fixed;
+}
+
+.report-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+/* ---- header ------------------------------------------------------- */
+
+.report-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ely-black);
+  white-space: nowrap;
+}
+
+.brand .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ely-pink);
+  flex: none;
+}
+
+.report-titleblock h1 {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0.35rem 0 0;
+}
+
+.report-titleblock h1 em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--ely-blue);
+}
+
+.meta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.pill strong {
+  color: var(--ely-black);
+  font-weight: 700;
+}
+
+.pill.pill-dark {
+  background: var(--ely-black);
+  border-color: var(--ely-black);
+  color: #fff;
+}
+
+.pill.pill-dark strong { color: #fff; }
+
+/* ---- section labels (small-caps + colored dot, like site's eyebrow) - */
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 2.5rem 0 1rem;
+}
+
+.section-label::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ely-pink);
+  flex: none;
+}
+
+.section-label.cyan::before  { background: var(--ely-cyan); }
+.section-label.blue::before  { background: var(--ely-blue); }
+
+/* ---- KPI cards (styled after the site's case-study stat cards) ----- */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.kpi-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem 1.3rem;
+  background: #ffffff;
+}
+
+.kpi-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.kpi-tag .dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+
+.kpi-card.cyan .kpi-tag { background: var(--ely-cyan-tint); color: #0C7C9B; }
+.kpi-card.cyan .kpi-tag .dot { background: var(--ely-cyan); }
+.kpi-card.pink .kpi-tag { background: var(--ely-pink-tint); color: var(--ely-pink); }
+.kpi-card.pink .kpi-tag .dot { background: var(--ely-pink); }
+.kpi-card.blue .kpi-tag { background: var(--ely-blue-tint); color: var(--ely-blue); }
+.kpi-card.blue .kpi-tag .dot { background: var(--ely-blue); }
+.kpi-card.neutral .kpi-tag { background: var(--bg-alt); color: var(--muted); }
+.kpi-card.neutral .kpi-tag .dot { background: var(--muted); }
+
+.kpi-value {
+  font-size: clamp(1.5rem, 3vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.kpi-card.cyan .kpi-value { color: #0C7C9B; }
+.kpi-card.pink .kpi-value { color: var(--ely-pink); }
+.kpi-card.blue .kpi-value { color: var(--ely-blue); }
+.kpi-card.neutral .kpi-value { color: var(--ely-black); }
+
+.kpi-caption {
+  font-size: 0.78rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: 0.6rem;
+}
+
+/* ---- tables ---------------------------------------------------------- */
+
+.table-wrap {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  background: #fff;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.86rem;
+}
+
+caption { caption-side: top; text-align: left; }
+
+th, td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+td { border-right: 1px solid var(--border); }
+td:last-child, th:last-child { border-right: none; }
+
+th {
+  background: var(--bg-alt);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+}
+
+.table-wrap table { border-radius: 0; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: #FBFCFD; }
+tbody tr:hover { background: var(--ely-cyan-tint); }
+
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.reason { color: var(--muted); font-size: 0.82rem; max-width: 32rem; }
+.error-cell { color: var(--fail); font-size: 0.82rem; }
+.summary-table td, .summary-table th { white-space: nowrap; }
+.detail-table td.reason, .detail-table td.input { white-space: normal; }
+
+/* ---- badges (pass/fail/status) -------------------------------------- */
+
+.badge {
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.badge.pass { background: var(--pass-tint); color: var(--pass); }
+.badge.fail { background: var(--fail-tint); color: var(--fail); }
+.badge.neutral { background: var(--bg-alt); color: var(--muted); }
+.badge.pink { background: var(--ely-pink-tint); color: var(--ely-pink); }
+.badge.cyan { background: var(--ely-cyan-tint); color: #0C7C9B; }
+.badge.blue { background: var(--ely-blue-tint); color: var(--ely-blue); }
+
+/* kept for backward-compat class names used elsewhere */
+.pass { color: var(--pass); font-weight: 600; }
+.fail { color: var(--fail); font-weight: 600; }
+
+/* ---- score bar -------------------------------------------------------- */
+
+.bar-cell { display: flex; align-items: center; gap: 0.5rem; }
+.bar-track { flex: 1; background: var(--bg-alt); border-radius: 3px; height: 8px; min-width: 60px; }
+.bar-fill { background: var(--pass); border-radius: 3px; height: 8px; }
+.bar-fill.low { background: var(--fail); }
+
+/* ---- footer ------------------------------------------------------------ */
+
+.report-footer {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+/* ---- per-golden cards ------------------------------------------------
+   One card per golden: its input/output shown once, then a compact table
+   of its metrics (instead of repeating the texts on every metric row). */
+
+.filter-toggle { position: absolute; opacity: 0; pointer-events: none; }
+
+.filter-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.78rem;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.filter-label::before {
+  content: "";
+  width: 0.8rem;
+  height: 0.8rem;
+  border: 1.5px solid var(--muted);
+  border-radius: 4px;
+  flex: none;
+}
+
+.filter-toggle:checked + .filter-label {
+  border-color: var(--ely-pink);
+  color: var(--ely-pink);
+  background: var(--ely-pink-tint);
+}
+
+.filter-toggle:checked + .filter-label::before {
+  background: var(--ely-pink);
+  border-color: var(--ely-pink);
+}
+
+.filter-toggle:focus-visible + .filter-label { outline: 2px solid var(--ely-blue); outline-offset: 2px; }
+
+.filter-toggle:checked ~ .golden-list .golden-card.all-pass { display: none; }
+
+.golden-list { display: grid; gap: 1.25rem; }
+
+.golden-card {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--fail);
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.golden-card.all-pass { border-left-color: var(--pass); }
+
+.golden-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-alt);
+}
+
+.golden-title { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+
+.golden-id {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-right: 0.25rem;
+}
+
+.qa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.qa-block { background: #fff; padding: 0.85rem 1.1rem; }
+
+.qa-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.qa-block:first-child .qa-label { color: var(--ely-blue); }
+.qa-block:last-child .qa-label { color: #0C7C9B; }
+
+.qa-text { font-size: 0.88rem; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+.qa-text details summary { cursor: pointer; list-style: none; }
+.qa-text details[open] summary { display: none; }
+.qa-text .more { color: var(--ely-blue); font-weight: 600; font-size: 0.78rem; }
+
+.golden-card .table-wrap { border: none; border-radius: 0; }
+
+.metric-table th { position: static; }
+.metric-table td { border-right: none; }
+.metric-table .metric-name { font-weight: 600; white-space: nowrap; }
+.metric-table .score-cell { min-width: 9rem; }
+.metric-table .judge, .metric-table .num { white-space: nowrap; }
+.metric-table .why { min-width: 18rem; white-space: pre-line; }
+
+@media print {
+  .filter-toggle, .filter-label { display: none; }
+  .golden-card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="report-shell">
+<div class="report-header">
+  <div class="report-titleblock">
+    <div class="brand"><span class="dot"></span>elyaeval</div>
+    <h1>results_agent_20261121T112044Z</h1>
+  </div>
+  <div class="meta-pills"><span class="pill">Source <strong>results_agent_20261121T112044Z.csv</strong></span><span class="pill">Rows <strong>14</strong></span></div>
+</div>
+<div class="kpi-grid"><div class="kpi-card blue">
+  <span class="kpi-tag"><span class="dot"></span>Goldens</span>
+  <div class="kpi-value">3</div>
+  <div class="kpi-caption">1 passed every metric</div>
+</div><div class="kpi-card cyan">
+  <span class="kpi-tag"><span class="dot"></span>Pass rate</span>
+  <div class="kpi-value">71%</div>
+  <div class="kpi-caption">Across every metric row</div>
+</div><div class="kpi-card pink">
+  <span class="kpi-tag"><span class="dot"></span>Judge cost</span>
+  <div class="kpi-value"> </div>
+  <div class="kpi-caption">Not reported by the judge provider</div>
+</div><div class="kpi-card neutral">
+  <span class="kpi-tag"><span class="dot"></span>Budget</span>
+  <div class="kpi-value">0.9 min / 30</div>
+  <div class="kpi-caption">10 judge calls · 7,402 tokens (estimated)</div>
+</div></div>
+<h2 class="section-label">Per-metric summary</h2>
+<div class="table-wrap"><table class="summary-table"><thead><tr><th>Metric Name</th><th>Goldens</th><th>Avg score</th><th>95% CI</th><th>Noise σ</th><th>Min</th><th>Max</th><th>Pass rate</th><th>Threshold</th><th>Judge model</th><th>Total cost</th><th>Input tokens</th><th>Output tokens</th></tr></thead><tbody><tr><td>Tool Correctness</td><td class="num">3</td><td><div class="bar-cell"><span class="num">0.67</span><div class="bar-track"><div class="bar-fill low" style="width:67%"></div></div></div></td><td class="num">[0.00, 1.00]</td><td class="num"> </td><td class="num">0.00</td><td class="num">1.00</td><td class="num">67% <span class="reason">(2/3)</span></td><td class="num">1.00</td><td> </td><td class="num"> <span class="reason"></span></td><td class="num"> <span class="reason"></span></td><td class="num"> </td></tr><tr><td>Argument Correctness</td><td class="num">2</td><td><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">[1.00, 1.00]</td><td class="num"> </td><td class="num">1.00</td><td class="num">1.00</td><td class="num">100% <span class="reason">(2/2)</span></td><td class="num">0.70</td><td>llama3.1 (Ollama)</td><td class="num"> <span class="reason"></span></td><td class="num">≈1,991<span class="reason"></span></td><td class="num">≈95</td></tr><tr><td>Correctness [GEval]</td><td class="num">3</td><td><div class="bar-cell"><span class="num">0.40</span><div class="bar-track"><div class="bar-fill low" style="width:40%"></div></div></div></td><td class="num">[0.20, 0.80]</td><td class="num"> </td><td class="num">0.20</td><td class="num">0.80</td><td class="num">33% <span class="reason">(1/3)</span></td><td class="num">0.70</td><td>llama3.1 (Ollama)</td><td class="num"> <span class="reason"></span></td><td class="num">≈1,748<span class="reason"></span></td><td class="num">≈502</td></tr><tr><td>Tool Call Budget</td><td class="num">3</td><td><div class="bar-cell"><span class="num">0.67</span><div class="bar-track"><div class="bar-fill low" style="width:67%"></div></div></div></td><td class="num">[0.00, 1.00]</td><td class="num"> </td><td class="num">0.00</td><td class="num">1.00</td><td class="num">67% <span class="reason">(2/3)</span></td><td class="num">1.00</td><td>deterministic</td><td class="num"> <span class="reason"></span></td><td class="num"> <span class="reason"></span></td><td class="num"> </td></tr><tr><td>Repeated Tool Calls</td><td class="num">3</td><td><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">[1.00, 1.00]</td><td class="num"> </td><td class="num">1.00</td><td class="num">1.00</td><td class="num">100% <span class="reason">(3/3)</span></td><td class="num">1.00</td><td>deterministic</td><td class="num"> <span class="reason"></span></td><td class="num"> <span class="reason"></span></td><td class="num"> </td></tr></tbody></table></div><p class="reason">≈ tokens estimated by elyaeval from prompt/reply size (~4 characters per token): the judge provider reports none.</p>
+<h2 class="section-label cyan">Per-golden usage</h2><div class="table-wrap"><table class="summary-table"><thead><tr><th>Golden Id</th><th>Priority</th><th>App latency</th><th>App in tokens</th><th>App out tokens</th><th>App cost</th><th>Judge time</th><th>Judge calls</th><th>Judge in tokens</th><th>Judge out tokens</th></tr></thead><tbody><tr><td>facts-offshore-cf</td><td>P0</td><td class="num">7.9s</td><td class="num">984</td><td class="num">33</td><td class="num"> </td><td class="num">11.1s</td><td class="num">4</td><td class="num">≈1,595</td><td class="num">≈198</td></tr><tr><td>convert-mwh-gwh</td><td>P0</td><td class="num">8.2s</td><td class="num">938</td><td class="num">42</td><td class="num"> </td><td class="num">10.9s</td><td class="num">4</td><td class="num">≈1,497</td><td class="num">≈213</td></tr><tr><td>greeting-no-tools</td><td>P0</td><td class="num">8.4s</td><td class="num">984</td><td class="num">85</td><td class="num"> </td><td class="num">10.1s</td><td class="num">2</td><td class="num">≈647</td><td class="num">≈186</td></tr></tbody></table></div><p class="reason">App figures are what the app under test reported for its own call (blank: it reported none). Judge time includes every metric's judge calls and retries.</p>
+<h2 class="section-label pink">Per-golden detail</h2>
+<input type="checkbox" id="only-failing" class="filter-toggle"><label for="only-failing" class="filter-label">Show only failing goldens (2)</label><div class="golden-list"><article class="golden-card"><header class="golden-head"><div class="golden-title"><span class="golden-id">facts-offshore-cf</span><span class="pill">Priority <strong>P0</strong></span></div><span class="badge fail">● failed · 4/5 passed</span></header><div class="qa-grid"><div class="qa-block"><div class="qa-label">Input</div><div class="qa-text">What is the typical capacity factor of offshore wind?</div></div><div class="qa-block"><div class="qa-label">Output</div><div class="qa-text">The typical capacity factor of offshore wind is 0.45.</div></div></div><div class="table-wrap"><table class="metric-table"><thead><tr><th>Metric</th><th>Score</th><th>Threshold</th><th>Result</th><th>Judge</th><th>Judge tokens in / out</th><th>Judge time</th><th>Reason / error</th></tr></thead><tbody><tr><td class="metric-name">Tool Correctness</td><td class="score-cell"><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">1.00</td><td><span class="badge pass">● pass</span></td><td class="judge">—</td><td class="num">—</td><td class="num">—</td><td class="reason why">[
+	 Tool Calling Reason: All expected tools [&#x27;get_technology_facts&#x27;] were called (order not considered).
+	 Tool Selection Reason: No available tools were provided to assess tool selection criteria
+]
+</td></tr><tr><td class="metric-name">Argument Correctness</td><td class="score-cell"><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">0.70</td><td><span class="badge pass">● pass</span></td><td class="judge">llama3.1 (Ollama)</td><td class="num">≈1,031 / ≈50</td><td class="num">8.5s · 2 calls</td><td class="reason why">The score is 1.00 because the input is accurate and relevant to the question, and there are no incorrect tool calls to penalize the score.</td></tr><tr><td class="metric-name">Correctness [GEval]</td><td class="score-cell"><div class="bar-cell"><span class="num">0.20</span><div class="bar-track"><div class="bar-fill low" style="width:20%"></div></div></div></td><td class="num">0.70</td><td><span class="badge fail">● fail</span></td><td class="judge">llama3.1 (Ollama)</td><td class="num">≈564 / ≈148</td><td class="num">2.5s · 2 calls</td><td class="reason why">The Actual Output and Expected Output differ in facts, as the Actual Output provides a specific value (0.45) whereas the Expected Output provides a range (40% to 50%).</td></tr><tr><td class="metric-name">Tool Call Budget</td><td class="score-cell"><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">1.00</td><td><span class="badge pass">● pass</span></td><td class="judge">deterministic</td><td class="num">—</td><td class="num">—</td><td class="reason why">1 tool call(s); budget 2</td></tr><tr><td class="metric-name">Repeated Tool Calls</td><td class="score-cell"><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">1.00</td><td><span class="badge pass">● pass</span></td><td class="judge">deterministic</td><td class="num">—</td><td class="num">—</td><td class="reason why">no identical tool call repeated</td></tr></tbody></table></div></article><article class="golden-card all-pass"><header class="golden-head"><div class="golden-title"><span class="golden-id">convert-mwh-gwh</span><span class="pill">Priority <strong>P0</strong></span></div><span class="badge pass">● passed 5/5</span></header><div class="qa-grid"><div class="qa-block"><div class="qa-label">Input</div><div class="qa-text">Convert 250 MWh to GWh.</div></div><div class="qa-block"><div class="qa-label">Output</div><div class="qa-text">The value 250 MWh is equivalent to 0.25 GWh.</div></div></div><div class="table-wrap"><table class="metric-table"><thead><tr><th>Metric</th><th>Score</th><th>Threshold</th><th>Result</th><th>Judge</th><th>Judge tokens in / out</th><th>Judge time</th><th>Reason / error</th></tr></thead><tbody><tr><td class="metric-name">Tool Correctness</td><td class="score-cell"><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">1.00</td><td><span class="badge pass">● pass</span></td><td class="judge">—</td><td class="num">—</td><td class="num">—</td><td class="reason why">[
+	 Tool Calling Reason: All expected tools [&#x27;convert_energy&#x27;] were called (order not considered).
+	 Tool Selection Reason: No available tools were provided to assess tool selection criteria
+]
+</td></tr><tr><td class="metric-name">Argument Correctness</td><td class="score-cell"><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">0.70</td><td><span class="badge pass">● pass</span></td><td class="judge">llama3.1 (Ollama)</td><td class="num">≈960 / ≈45</td><td class="num">7.9s · 2 calls</td><td class="reason why">The score is 1.00 because the input was correctly converted from MWh to GWh, indicating perfect argument correctness.</td></tr><tr><td class="metric-name">Correctness [GEval]</td><td class="score-cell"><div class="bar-cell"><span class="num">0.80</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div></div></td><td class="num">0.70</td><td><span class="badge pass">● pass</span></td><td class="judge">llama3.1 (Ollama)</td><td class="num">≈537 / ≈168</td><td class="num">3.0s · 2 calls</td><td class="reason why">The Actual Output and Expected Output are factually consistent, but the phrasing differs slightly. The Actual Output uses the phrase &#x27;The value 250 MWh is equivalent to 0.25 GWh&#x27;, whereas the Expected Output uses a more concise &#x27;250 MWh is 0.25 GWh&#x27;.</td></tr><tr><td class="metric-name">Tool Call Budget</td><td class="score-cell"><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">1.00</td><td><span class="badge pass">● pass</span></td><td class="judge">deterministic</td><td class="num">—</td><td class="num">—</td><td class="reason why">1 tool call(s); budget 2</td></tr><tr><td class="metric-name">Repeated Tool Calls</td><td class="score-cell"><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">1.00</td><td><span class="badge pass">● pass</span></td><td class="judge">deterministic</td><td class="num">—</td><td class="num">—</td><td class="reason why">no identical tool call repeated</td></tr></tbody></table></div></article><article class="golden-card"><header class="golden-head"><div class="golden-title"><span class="golden-id">greeting-no-tools</span><span class="pill">Priority <strong>P0</strong></span></div><span class="badge fail">● failed · 1/4 passed</span></header><div class="qa-grid"><div class="qa-block"><div class="qa-label">Input</div><div class="qa-text">Hi! What can you help me with?</div></div><div class="qa-block"><div class="qa-label">Output</div><div class="qa-text">I can help you with questions about electricity generation technologies, such as solar PV. I can look up facts about their capacity factors, lifetimes, and lifecycle CO2 emissions. I can also estimate a plant&#x27;s annual generation, convert energy units, and estimate CO2 avoided when one technology replaces another. What&#x27;s your question?</div></div></div><div class="table-wrap"><table class="metric-table"><thead><tr><th>Metric</th><th>Score</th><th>Threshold</th><th>Result</th><th>Judge</th><th>Judge tokens in / out</th><th>Judge time</th><th>Reason / error</th></tr></thead><tbody><tr><td class="metric-name">Tool Correctness</td><td class="score-cell"><div class="bar-cell"><span class="num">0.00</span><div class="bar-track"><div class="bar-fill low" style="width:0%"></div></div></div></td><td class="num">1.00</td><td><span class="badge fail">● fail</span></td><td class="judge">—</td><td class="num">—</td><td class="num">—</td><td class="reason why">[
+	 Tool Calling Reason: Incomplete tool usage: missing tools []; expected [], called [&#x27;get_technology_facts&#x27;]. See more details above.
+	 Tool Selection Reason: No available tools were provided to assess tool selection criteria
+]
+</td></tr><tr><td class="metric-name">Correctness [GEval]</td><td class="score-cell"><div class="bar-cell"><span class="num">0.20</span><div class="bar-track"><div class="bar-fill low" style="width:20%"></div></div></div></td><td class="num">0.70</td><td><span class="badge fail">● fail</span></td><td class="judge">llama3.1 (Ollama)</td><td class="num">≈647 / ≈186</td><td class="num">10.1s · 2 calls</td><td class="reason why">The Actual Output includes specific details about the assistant&#x27;s capabilities, such as estimating a plant&#x27;s annual generation and converting energy units, which are not present in the Expected Output. Additionally, the Actual Output calls a tool to look up facts, whereas the Expected Output does not mention any tools.</td></tr><tr><td class="metric-name">Tool Call Budget</td><td class="score-cell"><div class="bar-cell"><span class="num">0.00</span><div class="bar-track"><div class="bar-fill low" style="width:0%"></div></div></div></td><td class="num">1.00</td><td><span class="badge fail">● fail</span></td><td class="judge">deterministic</td><td class="num">—</td><td class="num">—</td><td class="reason why">1 tool call(s); budget 0</td></tr><tr><td class="metric-name">Repeated Tool Calls</td><td class="score-cell"><div class="bar-cell"><span class="num">1.00</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div></div></td><td class="num">1.00</td><td><span class="badge pass">● pass</span></td><td class="judge">deterministic</td><td class="num">—</td><td class="num">—</td><td class="reason why">no identical tool call repeated</td></tr></tbody></table></div></article></div>
+<div class="report-footer">Generated by elyaeval &middot; results_agent_20261121T112044Z.csv</div>
+</div>
+</body>
+</html>

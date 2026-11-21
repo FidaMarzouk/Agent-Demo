@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "run_ts": "20261121T113434Z",
+  "totals": {
+    "judge_calls": 12,
+    "judge_call_seconds": 54.48436769,
+    "judge_prompt_tokens_estimated": 30518,
+    "judge_output_tokens_estimated": 527,
+    "judge_call_errors": 0,
+    "goldens_evaluated": 3,
+    "metric_evaluations": 12,
+    "cached_metric_evaluations": 0,
+    "judge_seconds": 88.05254427800082,
+    "judge_cost_reported": null,
+    "judge_tokens_reported": null,
+    "sut_seconds": null,
+    "sut_input_tokens": null,
+    "sut_output_tokens": null,
+    "sut_cost": null
+  },
+  "budget": {
+    "limits": {
+      "cost_usd": null,
+      "seconds": 1800.0,
+      "tokens": null,
+      "judge_calls": null
+    },
+    "on_exceed": "stop",
+    "predictive": true,
+    "spent": {
+      "cost_usd": null,
+      "judge_cost_usd": null,
+      "judge_cost_source": "unknown",
+      "sut_cost_usd": null,
+      "sut_cost_source": "unknown",
+      "seconds": 88.38218086400047,
+      "tokens": 31045,
+      "tokens_source": "estimated",
+      "judge_calls": 12,
+      "goldens_evaluated": 3
+    },
+    "exhausted": false,
+    "exhausted_reason": null,
+    "warnings": [],
+    "skipped": []
+  },
+  "pricing": {
+    "judge_input_per_mtok": null,
+    "judge_output_per_mtok": null,
+    "judge_per_hour": null,
+    "sut_input_per_mtok": null,
+    "sut_output_per_mtok": null
+  },
+  "goldens": [
+    {
+      "golden_id": "facts-offshore-cf",
+      "repeat": 0,
+      "priority": "P0",
+      "n_metrics": 4,
+      "n_cached": 0,
+      "judge_seconds": 40.72548066300078,
+      "judge_cost_reported": null,
+      "judge_tokens_reported": null,
+      "sut_seconds": null,
+      "sut_input_tokens": null,
+      "sut_output_tokens": null,
+      "sut_cost": null
+    },
+    {
+      "golden_id": "convert-mwh-gwh",
+      "repeat": 0,
+      "priority": "P0",
+      "n_metrics": 4,
+      "n_cached": 0,
+      "judge_seconds": 22.63440869399983,
+      "judge_cost_reported": null,
+      "judge_tokens_reported": null,
+      "sut_seconds": null,
+      "sut_input_tokens": null,
+      "sut_output_tokens": null,
+      "sut_cost": null
+    },
+    {
+      "golden_id": "greeting-no-tools",
+      "repeat": 0,
+      "priority": "P0",
+      "n_metrics": 4,
+      "n_cached": 0,
+      "judge_seconds": 24.692654921000212,
+      "judge_cost_reported": null,
+      "judge_tokens_reported": null,
+      "sut_seconds": null,
+      "sut_input_tokens": null,
+      "sut_output_tokens": null,
+      "sut_cost": null
+    }
+  ]
+}

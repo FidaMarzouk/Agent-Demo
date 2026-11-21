@@ -1,0 +1,23 @@
+{
+  "ci_stage": "per_commit",
+  "created_at": "2026-11-21T11:27:37+00:00",
+  "dataset_sha256": "e21fd0363f9bfad2d243b06a2c5ecc2babd1c33f5d7cd378b8bd48462b5b7b95",
+  "datasets": [
+    {
+      "ci_stage": "per_commit",
+      "n_goldens": 3,
+      "path": "goldens_agent_demo.jsonl",
+      "sha256": "f266b7a43f9c6167d6c0ba390df22d9c58fe876775af4173c5f440f627859b48",
+      "task_type": "agentic_action"
+    }
+  ],
+  "deepeval_version": "4.2.0",
+  "elyaeval_version": "0.1.2",
+  "git_sha": "2671684097af3c2c636bbe29870f40271861c195",
+  "judge": "ollama:llama3.1",
+  "judge_temperature": 0.0,
+  "python_version": "3.11.17",
+  "repeats": 1,
+  "schema_version": 1,
+  "sut": {}
+}
